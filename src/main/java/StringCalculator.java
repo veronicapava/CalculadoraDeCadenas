@@ -5,8 +5,6 @@ import java.util.stream.Collectors;
 
 public class StringCalculator {
 
-    //Una cadena vacia devuelve 0
-
     public int add(String input) throws Exception {
 
         if(input.isBlank()) {
@@ -17,14 +15,7 @@ public class StringCalculator {
         var numerosFiltrados = filtradoNumeros(numeros);
         var total = suma(numerosFiltrados);
 
-
-
-        System.out.println("delimitarod es " + deli);
-        System.out.println("Array de numeros " + numeros);
-        System.out.println("Array de numeros filtrados " + numerosFiltrados);
-        System.out.println("total " + total);
-
-        return 0;
+        return total;
     }
 
     public String encontrarDelimitador(String input) throws Exception {
@@ -70,7 +61,7 @@ public class StringCalculator {
 
     public List<Integer> filtradoNumeros(List<Integer> lista) throws Exception {
         if (lista.stream().anyMatch(item -> item < 0))
-            throw new Exception("No tan permitidos los numeros negativos");
+            throw new Exception("No estan permitidos los numeros negativos");
         lista.removeIf(item -> item > 1000);
         return lista;
     }
