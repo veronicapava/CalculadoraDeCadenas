@@ -14,9 +14,15 @@ public class StringCalculator {
         }
         var deli = encontrarDelimitador(input);
         var numeros = splitInput(input, deli);
+        var numerosFiltrados = filtradoNumeros(numeros);
+        var total = suma(numerosFiltrados);
+
+
 
         System.out.println("delimitarod es " + deli);
         System.out.println("Array de numeros " + numeros);
+        System.out.println("Array de numeros filtrados " + numerosFiltrados);
+        System.out.println("total " + total);
 
         return 0;
     }
@@ -52,7 +58,7 @@ public class StringCalculator {
     public List<Integer> splitInput(String input, String delimitador) throws Exception {
         try {
             var values = new ArrayList<>(Arrays.asList(input.split(delimitador)));
-            values.removeIf(item -> item == null || "".equals(item));
+             values.removeIf(item -> item == null || "".equals(item));
 
             return values.stream()
                          .map(item -> Integer.parseInt(item))
@@ -60,9 +66,18 @@ public class StringCalculator {
         }catch (Exception e){
             throw new Exception("No es posible hacer split con el delimitador encontrado");
         }
+    }
 
+    public List<Integer> filtradoNumeros(List<Integer> lista) throws Exception {
+        if (lista.stream().anyMatch(item -> item < 0))
+            throw new Exception("No tan permitidos los numeros negativos");
+        lista.removeIf(item -> item > 1000);
+        return lista;
     }
 
 
+    public  int suma(List<Integer> list){
+          return list.stream().reduce(0, (a,b) -> a + b);
+    }
 
 }
